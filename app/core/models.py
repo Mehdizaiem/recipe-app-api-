@@ -22,7 +22,7 @@ class UserManager(BaseUserManager):
         :param password: Description
         :param extra_field: Description
         """
-        if not email : 
+        if not email:
             raise ValueError('User email not found ')
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
@@ -43,6 +43,7 @@ class UserManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     """
     Docstring for User
@@ -53,5 +54,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     objects = UserManager()
-    
+
     USERNAME_FIELD = 'email'
